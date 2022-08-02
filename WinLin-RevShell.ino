@@ -2,7 +2,7 @@
 #include "DigiKeyboard.h"
 
 void setup() {
-  // windows - abre powershell
+  // windows - abre cmd
   DigiKeyboard.sendKeyStroke(KEY_R, MOD_GUI_LEFT);
   DigiKeyboard.delay(200);
   DigiKeyboard.print("cmd");
