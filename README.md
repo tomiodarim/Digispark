@@ -1,4 +1,4 @@
-# Scripts para Ataques Hardware com USB Digispark 
+# USB Digispark Malicioso - PoC
 
 ## Descrição:
 A exploração de ataques cibernético com dispositivos USB sendo a fonte inicial infecção, subiu de 19% em 2019 para pouco mais de 37% em 2020, o segundo ano consecutivo de crescimento significativo nesta área (2021, Honeywell). Demonstrando uma tendência em utilizar dispositivos USB como um vector de ataque inicial, e burlar Firewalls e estrategias de segurança tradicionais.
