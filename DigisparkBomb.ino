@@ -21,7 +21,7 @@ void setup() {
   DigiKeyboard.delay(1000);
   DigiKeyboard.print("ForEach ($line in $file){Invoke-Expression $line}");
   DigiKeyboard.sendKeyStroke(KEY_ENTER);
-  DigiKeyboard.delay(1000);  
+  DigiKeyboard.delay(5000);  
   
   DigiKeyboard.print("exit");
   DigiKeyboard.sendKeyStroke(KEY_ENTER);
